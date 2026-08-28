@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Flappy Challenge - Enhanced Edition</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Canvas Game Screen -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- In-Game Score Header -->
+        <div id="scoreDisplay" class="ui-layer hidden">
+            <div class="badge-group">
+                <div class="score-badge">SCORE <span id="currentScore">0</span></div>
+                <div class="score-badge level-badge">LVL <span id="currentLevel">1</span></div>
+            </div>
+            <button id="muteBtn" class="icon-btn" aria-label="Toggle Sound">🔊</button>
+        </div>
+
+        <!-- Home Screen -->
+        <div id="homeScreen" class="overlay-screen active">
+            <div class="card glass-card">
+                <div class="logo-wrapper">
+                    <h1 class="game-title">FLAPPY<br><span class="gradient-text">CHALLENGE</span></h1>
+                    <span class="pro-tag">PRO ENHANCED</span>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">BEST SCORE</span>
+                        <span id="homeHighScore" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">HIGHEST LEVEL</span>
+                        <span id="homeHighLevel" class="stat-value">1</span>
+                    </div>
+                </div>
+
+                <button id="startButton" class="btn btn-primary pulse-btn">START GAME</button>
+
+                <div class="instructions">
+                    <p><strong>PC:</strong> Space / Up Arrow / Mouse Click</p>
+                    <p><strong>Mobile:</strong> Tap Screen</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Complete Screen -->
+        <div id="levelPopup" class="overlay-screen hidden">
+            <div class="card modal-card animate-pop glass-card">
+                <div class="crown-icon">👑</div>
+                <h2 class="gradient-text-gold">LEVEL COMPLETED!</h2>
+                <p class="subtitle">Next stage unlocked with higher speed!</p>
+                <div class="stat-highlight">
+                    <span>STAGE CLEARED</span>
+                    <strong id="completedLevelNum">1</strong>
+                </div>
+                <button id="nextLevelButton" class="btn btn-success">NEXT LEVEL</button>
+            </div>
+        </div>
+
+        <!-- Game Over Screen -->
+        <div id="gameOverPopup" class="overlay-screen hidden">
+            <div class="card modal-card animate-pop glass-card">
+                <h2 class="danger-text">GAME OVER</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-label">FINAL SCORE</span>
+                        <span id="finalScore" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">REACHED LEVEL</span>
+                        <span id="finalLevel" class="stat-value">1</span>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button id="retryButton" class="btn btn-primary">RETRY</button>
+                    <button id="homeButton" class="btn btn-secondary">HOME</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

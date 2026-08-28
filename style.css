@@ -1,0 +1,319 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #030712;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #ffffff;
+    touch-action: manipulation;
+}
+
+#gameContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 550px;
+    max-height: 950px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* UI Overlay Layers */
+.ui-layer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.badge-group {
+    display: flex;
+    gap: 10px;
+}
+
+.score-badge {
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.score-badge span {
+    color: #38bdf8;
+    margin-left: 4px;
+    font-size: 1.1rem;
+}
+
+.level-badge span {
+    color: #facc15;
+}
+
+.icon-btn {
+    pointer-events: auto;
+    background: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.icon-btn:active {
+    transform: scale(0.9);
+}
+
+/* Fullscreen Overlay Screens */
+.overlay-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(3, 7, 18, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 20;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.overlay-screen.hidden,
+.ui-layer.hidden {
+    display: none !important;
+}
+
+.glass-card {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.card {
+    border-radius: 28px;
+    padding: 36px 28px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.logo-wrapper {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.game-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1.0;
+    letter-spacing: -1px;
+    color: #ffffff;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-gold {
+    background: linear-gradient(135deg, #facc15 0%, #f97316 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pro-tag {
+    display: inline-block;
+    margin-top: 8px;
+    background: linear-gradient(90deg, #f59e0b, #d97706);
+    color: #000;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 3px 10px;
+    border-radius: 999px;
+    letter-spacing: 1.5px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 14px 10px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #94a3b8;
+    letter-spacing: 0.8px;
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #facc15;
+}
+
+.crown-icon {
+    font-size: 2.8rem;
+    margin-bottom: 8px;
+}
+
+.stat-highlight {
+    background: rgba(56, 189, 248, 0.08);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    padding: 16px;
+    border-radius: 20px;
+    margin: 20px 0 28px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.stat-highlight span {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #38bdf8;
+    letter-spacing: 1px;
+}
+
+.stat-highlight strong {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.instructions {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.78rem;
+    color: #94a3b8;
+    line-height: 1.6;
+}
+
+/* Buttons */
+.btn {
+    width: 100%;
+    padding: 18px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 20px -5px rgba(56, 189, 248, 0.4);
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+}
+
+.pulse-btn {
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5); }
+    50% { box-shadow: 0 0 0 14px rgba(56, 189, 248, 0); }
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #4ade80 0%, #16a34a 100%);
+    color: #ffffff;
+    box-shadow: 0 10px 20px -5px rgba(74, 222, 128, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.danger-text {
+    color: #f87171;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* Animations */
+.animate-pop {
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
